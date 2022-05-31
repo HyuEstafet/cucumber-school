@@ -100,10 +100,11 @@
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine -->
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
             <version>7.3.4</version>
             <scope>test</scope>
         </dependency>
+
 
 
     </dependencies>
