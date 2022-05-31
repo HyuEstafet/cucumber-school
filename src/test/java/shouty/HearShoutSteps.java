@@ -1,30 +1,42 @@
 package shouty;
 
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Before;
+import shoutyMain.Network;
+import shoutyMain.Person;
+
+import java.util.HashMap;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HearShoutSteps {
-   Person lucy = new Person();// In the video it is "Person lucy = new Person("Lucy");" --> Why?
-   Person sean = new Person ();// In the video it is "Person lucy = new Person("Lucy");" --> Why?
+   private Person lucy;
+   private Person sean;
    private String messageFromSean;
+   private Network network;
+   private HashMap <String, Person> people;
 
-    @Given("{person} is located/standing {int} metre(s) from Sean")
-    public void lucy_is_located_metres_from_sean(Person person, Integer distance) {
-        throw new PendingException(String.format("Lucy is %d centimetres from Sean", distance*100));
+    @Before
+    public void createNetwork() {
+        network = new Network(); // Creating a new network before each scenario runs
+        people = new HashMap<>(); // So we can store a key
+    }
+
+    @Given("a person named {word}")
+    public void a_person_named(String name) {
+        people.put(name,new Person(network));
     }
     @When("Sean shouts {string}")
-    public void sean_shouts(String message) {
-        sean.shout(message);
+    public void sean_shouts(String message) throws Throwable {
+        people.get("Sean").shout(message);
         messageFromSean = message;
     }
 
-    @Then("Lucy hears Sean's message")
-    public void lucy_hears_sean_s_message() {
-        assertEquals(asList(messageFromSean),lucy.getMessagesHeard());
+    @Then("Lucy should hear Sean's message")
+    public void lucy_hears_sean_s_message() throws Throwable {
+        assertEquals(asList(messageFromSean),people.get("Lucy").getMessagesHeard());
     }
 }
