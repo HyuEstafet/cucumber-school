@@ -1,4 +1,4 @@
-package shoutyMain;
+package shouty;
 import java.util.ArrayList;
 import java.util.List;
 
