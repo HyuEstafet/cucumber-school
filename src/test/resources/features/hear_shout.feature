@@ -58,3 +58,4 @@ Feature: Hear shout
         the limit of 180 characters.
         """
       Then Lucy should not hear a shout
+

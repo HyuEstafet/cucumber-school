@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty"},
         features = "src/test/resources/features",
         glue = "shouty",
-        tags = "@Test01"
+        tags = "@SHOUTY-11"
 )
 public class RunCucumberTest {
 }
